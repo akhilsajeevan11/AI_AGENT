@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Hospital Admin Agent{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Hospital Administration Agent</h1>
+        <nav>
+            <ul>
+                <li class="{{ 'active' if active_page == 'home' else '' }}"><a href="{{ url_for('home') }}">Home</a></li>
+                <li class="{{ 'active' if active_page == 'register_patient' else '' }}"><a href="{{ url_for('register_patient_page') }}">Register Patient</a></li>
+                <li class="{{ 'active' if active_page == 'schedule_appointment' else '' }}"><a href="{{ url_for('schedule_appointment_page') }}">Schedule Appointment</a></li>
+                <li class="{{ 'active' if active_page == 'view_my_appointments' else '' }}"><a href="{{ url_for('view_my_appointments_page') }}">View My Appointments</a></li>
+                <li class="{{ 'active' if active_page == 'view_doctors' else '' }}"><a href="{{ url_for('view_doctors_page') }}">View Doctors</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="flash flash-{{ category }}">{{ message }}</div>
+                {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        
+        {% block content %}{% endblock %}
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 Hospital Administration System. AI-Powered by CrewAI.</p>
+    </footer>
+</body>
+</html>

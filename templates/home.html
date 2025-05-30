@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Hospital Admin Agent{% endblock %}
+
+{% block content %}
+    <h2>Welcome to the AI-Powered Hospital Administration System!</h2>
+    <p>This system helps you manage patient registrations, appointments, and doctor information using intelligent agents.</p>
+    <p>Please use the navigation links in the header to access different features of the application.</p>
+    
+    <section class="info-section">
+        <h3>Key Features:</h3>
+        <ul>
+            <li>Register new patients efficiently.</li>
+            <li>Schedule, view, and manage appointments.</li>
+            <li>Browse doctor specializations and availability.</li>
+            <li>All interactions are processed by specialized AI agents.</li>
+        </ul>
+    </section>
+
+    <p class="info-text" style="margin-top: 20px;">
+        The interactive web frontend is currently under development. Some results from AI agent actions will be displayed on the respective pages. For detailed, verbose output from the AI agents and full functionality, please also refer to the CLI interface (`main_crew.py`).
+    </p>
+{% endblock %}

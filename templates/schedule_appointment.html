@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Schedule Appointment - Hospital Admin{% endblock %}
+
+{% block content %}
+    <h2>Schedule New Appointment</h2>
+    
+    <p class="info-text">
+        To schedule an appointment, you typically need to know the Patient ID, Doctor ID, and a specific Doctor Availability Slot ID. 
+        You can find Doctor Availability using the "View Doctors" page (Check Availability form).
+    </p>
+
+    <!-- Placeholder for loading indicator -->
+    <!-- <div id="loading-indicator" style="display:none; padding: 10px; background-color: #e0e0e0; margin-bottom:15px; text-align:center;">Processing your request...</div> -->
+
+    <form action="{{ url_for('submit_schedule_appointment') }}" method="POST" class="data-form">
+        <fieldset>
+            <legend>Appointment Details</legend>
+            <div class="form-group">
+                <label for="patient_id">Patient ID:</label>
+                <input type="number" id="patient_id" name="patient_id" value="{{ schedule_attempt_data.patient_id or '' }}" required placeholder="Enter patient's ID">
+            </div>
+            <div class="form-group">
+                <label for="doctor_id">Doctor ID:</label>
+                <input type="number" id="doctor_id" name="doctor_id" value="{{ schedule_attempt_data.doctor_id or '' }}" required placeholder="Enter doctor's ID">
+            </div>
+            <div class="form-group">
+                <label for="availability_id">Doctor Availability Slot ID:</label>
+                <input type="number" id="availability_id" name="availability_id" value="{{ schedule_attempt_data.availability_id or '' }}" required placeholder="Enter the chosen availability slot ID">
+            </div>
+             <div class="form-group">
+                <label for="appointment_datetime">Appointment Date and Time (confirm from slot):</label>
+                <input type="datetime-local" id="appointment_datetime" name="appointment_datetime" value="{{ schedule_attempt_data.appointment_datetime or '' }}" required>
+            </div>
+            <div class="form-group">
+                <label for="duration_minutes">Duration (minutes, confirm from slot):</label>
+                <input type="number" id="duration_minutes" name="duration_minutes" value="{{ schedule_attempt_data.duration_minutes or '30' }}" required>
+            </div>
+            <div class="form-group">
+                <label for="reason_for_visit">Reason for Visit:</label>
+                <textarea id="reason_for_visit" name="reason_for_visit" rows="3" required>{{ schedule_attempt_data.reason_for_visit or '' }}</textarea>
+            </div>
+        </fieldset>
+        <div class="form-actions">
+            <button type="submit" class="button-primary">Schedule Appointment</button>
+        </div>
+    </form>
+
+    {% if schedule_result %}
+    <section class="results-section">
+        <h3>Scheduling Attempt Result:</h3>
+        <div class="results-output">
+             <pre>{{ schedule_result if schedule_result is string else schedule_result | tojson(indent=2) }}</pre>
+        </div>
+    </section>
+    {% endif %}
+    
+    <hr style="margin: 30px 0;">
+    <div class="availability-placeholder">
+        <h2>Doctor Availability Lookup (Reminder)</h2>
+        <p>Use the "View Doctors" page to find specific doctor IDs and then check their availability using the form on that page.</p>
+    </div>
+{% endblock %}

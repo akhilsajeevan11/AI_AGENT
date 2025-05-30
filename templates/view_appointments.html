@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}View Appointments - Hospital Admin{% endblock %}
+
+{% block content %}
+    <h2>View Patient Appointments</h2>
+
+    <section class="form-section">
+        <h3>Find Appointments</h3>
+        <form action="{{ url_for('fetch_patient_appointments') }}" method="POST" class="data-form">
+            <div class="form-group">
+                <label for="phone_number">Patient Phone Number:</label>
+                <input type="tel" id="phone_number" name="phone_number" value="{{ patient_phone or '' }}" required placeholder="Enter patient's phone number">
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="button-primary">Fetch Appointments</button>
+            </div>
+        </form>
+    </section>
+    
+    {% if appointments_data %}
+    <hr style="margin: 30px 0;">
+    <section class="results-section">
+        <h3>Appointments Found:</h3>
+        <div id="appointmentsDisplayArea" class="results-output">
+            {% if appointments_data is iterable and appointments_data is not string and appointments_data is not mapping %}
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Appt. ID</th>
+                            <th>Doctor ID</th> {# Simplified, could join to get Dr Name in backend/agent #}
+                            <th>Date & Time</th>
+                            <th>Reason</th>
+                            <th>Status</th>
+                            <th>Availability ID</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for appt in appointments_data %}
+                        <tr>
+                            <td>{{ appt.appointment_id | default('N/A') }}</td>
+                            <td>{{ appt.doctor_id | default('N/A') }}</td>
+                            <td>{{ appt.appointment_datetime | default('N/A') }}</td>
+                            <td>{{ appt.reason_for_visit | default('N/A') }}</td>
+                            <td>{{ appt.status | default('N/A') }}</td>
+                            <td>{{ appt.availability_id | default('N/A') }}</td>
+                        </tr>
+                        {% else %}
+                        <tr><td colspan="6">No appointments found for the provided patient information.</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% elif appointments_data is mapping and appointments_data.message %}
+                <p>{{ appointments_data.message }}</p>
+            {% else %} {# Fallback for plain string (e.g., "No patient found", or error message from agent) #}
+                <p>{{ appointments_data }}</p>
+            {% endif %}
+        </div>
+    </section>
+    {% endif %}
+{% endblock %}

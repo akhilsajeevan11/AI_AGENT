@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Server Error - Hospital Admin{% endblock %}
+
+{% block content %}
+    <div class="error-page">
+        <h2>500 - Internal Server Error</h2>
+        <p>Sorry, something went wrong on our end. We are looking into it.</p>
+        <p>Please try again later, or return to the homepage.</p>
+        <p><a href="{{ url_for('home') }}" class="button-primary">Go to Homepage</a></p>
+    </div>
+{% endblock %}

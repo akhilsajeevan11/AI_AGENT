@@ -176,6 +176,12 @@ get_doctor_specializations_task_def = {
     "agent": medical_records_clerk_def["role"]
 }
 
+get_all_doctors_task_def = {
+    "description": "Retrieve a list of all doctors registered in the hospital system with their full details.",
+    "expected_output": "A list of doctor objects/dictionaries, each including their ID, first name, last name, specialization, phone, and email. Returns an empty list if no doctors are registered.",
+    "agent": medical_records_clerk_def["role"]
+}
+
 # Placeholder for a task to get doctors by specialization
 get_doctors_by_specialization_task_def = {
     "description": "Retrieve a list of doctors practicing a specific specialization: {specialization}.",

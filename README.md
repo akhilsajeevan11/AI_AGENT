@@ -135,7 +135,12 @@ There are two main ways to run the application:
 
 *   **Flask:** For the web framework.
 *   **CrewAI:** For orchestrating AI agents and tasks.
+<<<<<<< HEAD
 *   **Langchain (Core, Community, OpenAI, Groq):** For LLM interactions, tools, Pydantic models.
+=======
+*   **Langchain (Core, Community, OpenAI, Groq):** For LLM interactions, tools, and Pydantic model integration.
+*   **Pydantic (v2.x):** Explicitly used for data validation and settings management, ensuring compatibility with the latest Langchain and CrewAI versions. Included in `requirements.txt`.
+>>>>>>> origin/hospital-agent-crewai-refactor-v1
 *   **Python-Dotenv:** For managing environment variables.
 *   **SQLite:** The `sqlite3` module is part of the Python standard library.
 

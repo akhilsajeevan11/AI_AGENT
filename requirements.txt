@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 crewai>=0.28.8,<0.29.0 
+=======
+crewai>=0.28.8,<0.29.0
+>>>>>>> origin/hospital-agent-crewai-refactor-v1
 # crewai[tools]>=0.1.2,<0.2.0 # This line caused a conflict, newer crewai versions manage tools dependency.
 langchain>=0.1.16,<0.2.0
 langchain-community>=0.0.32,<0.1.0
@@ -6,6 +10,17 @@ langchain-openai>=0.1.3,<0.2.0
 langchain-groq>=0.1.2,<0.2.0
 python-dotenv>=1.0.0,<2.0.0
 Flask>=2.0.0,<4.0.0
+<<<<<<< HEAD
 # Note: Specific versions of sub-dependencies like pydantic, openai client, etc.,
 # will be resolved by pip based on these top-level requirements.
 # Users might need to adjust these based on their specific environment or if conflicts arise.
+=======
+pydantic>=2.7.0,<3.0.0 
+# Note: Specific versions of sub-dependencies like pydantic, openai client, etc.,
+# will be resolved by pip based on these top-level requirements.
+# Users might need to adjust these based on their specific environment or if conflicts arise.
+# Adding pydantic v2 explicitly. If older versions were installed as sub-dependencies,
+# pip will attempt to upgrade it. This might require users to run `pip install -r requirements.txt --upgrade`
+# or resolve conflicts if other packages strictly require Pydantic v1.
+# The specified Langchain/CrewAI versions are generally compatible with Pydantic v2.
+>>>>>>> origin/hospital-agent-crewai-refactor-v1

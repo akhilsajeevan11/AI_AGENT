@@ -158,7 +158,7 @@ There are two main ways to run the application:
     *   `langchain-core (>=0.2.0,<0.3.0)`: Provides base abstractions and LangChain Expression Language.
     *   `langchain-community (>=0.2.0,<0.3.0)`: Community-maintained third-party integrations.
     *   `langchain-openai (>=0.2.0,<0.3.0)`: OpenAI integration.
-    *   `langchain-google-genai (>=0.1.5,<0.2.0)`: Google Gemini integration.
+    *   `langchain-google-genai (>=1.0.0,<1.1.0)`: Google Gemini integration.
     *   `langchain-groq (>=0.1.5,<0.2.0)`: Groq integration.
 *   **Pydantic (`>=2.7.0,<3.0.0`):** Explicitly used for data validation and settings management, ensuring compatibility with the latest Langchain and CrewAI versions.
 *   **Python-Dotenv (`>=1.0.0,<2.0.0`):** For managing environment variables.

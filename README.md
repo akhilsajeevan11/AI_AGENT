@@ -12,7 +12,7 @@ Users can register patients, schedule/cancel/reschedule appointments, and query 
     *   Web-based patient registration.
     *   Browser-based views for doctor listings and availability.
     *   Forms for scheduling, viewing, and managing appointments (partially implemented for submission, full display of results on page).
-*   **AI-Powered Task Execution:** Uses CrewAI agents and an LLM (configurable, e.g., OpenAI GPT, Groq Mixtral) to interpret user needs and perform tasks via both web UI and CLI.
+*   **AI-Powered Task Execution:** Uses CrewAI agents and an LLM (configurable, e.g., OpenAI GPT, Groq Mixtral, Google Gemini) to interpret user needs and perform tasks via both web UI and CLI.
 *   **Patient Management:**
     *   Register new patients.
     *   Retrieve existing patient details.
@@ -42,7 +42,7 @@ The application comprises a backend (CrewAI agents and database logic) and a new
     *   `static/` directory: Contains static files like `style.css`.
 
 2.  **CrewAI Backend (Orchestrated by `app.py` or `main_crew.py`):**
-    *   **LLM Initialization:** Loads API keys (from `.env`) and configures the chosen LLM (e.g., `ChatOpenAI`, `ChatGroq`). This is done globally in `app.py` and `main_crew.py`.
+    *   **LLM Initialization:** Loads API keys (from `.env`) and configures the chosen LLM (e.g., `ChatOpenAI`, `ChatGroq`, `ChatGoogleGenerativeAI`). This is done globally in `app.py` and `main_crew.py`.
     *   **`crew_definitions.py`**: Defines blueprints for agent roles (Patient Onboarding Specialist, Scheduling Coordinator, Medical Records Clerk) and task outlines, guiding LLM behavior.
     *   **`database_tools.py`**: Provides Langchain `StructuredTool` objects wrapping database functions, enabling agents to interact with the database.
     *   **CrewAI Agents:** Instances of `Agent` (from `crewai`) are created based on `crew_definitions.py`, equipped with tools and the LLM.
@@ -87,7 +87,7 @@ The application comprises a backend (CrewAI agents and database logic) and a new
 
 *   Python 3.x (preferably 3.9 or higher).
 *   Git (for cloning, optional).
-*   Access to an LLM API (e.g., OpenAI, Groq) and the corresponding API key.
+*   Access to an LLM API (e.g., OpenAI, Groq, Google Gemini) and the corresponding API key.
 
 **Installation & Setup:**
 
@@ -101,9 +101,27 @@ The application comprises a backend (CrewAI agents and database logic) and a new
     ```bash
     pip install -r requirements.txt
     ```
-4.  **Configure API Keys:**
+4.  **Configure API Keys & LLM Provider:**
     *   Copy the example environment file: `cp .env.example .env`
-    *   Edit `.env` to add your API key(s) (e.g., `OPENAI_API_KEY="your_key_here"`) and set `LLM_PROVIDER` if not using OpenAI.
+    *   Edit the `.env` file to add your API key(s) and specify your chosen `LLM_PROVIDER`.
+    *   **Example for OpenAI (default if `LLM_PROVIDER` is not set):**
+        ```env
+        OPENAI_API_KEY="your_openai_api_key_here"
+        # OPENAI_MODEL_NAME="gpt-4" # Optional, defaults to gpt-3.5-turbo
+        ```
+    *   **Example for Groq:**
+        ```env
+        LLM_PROVIDER="groq"
+        GROQ_API_KEY="your_groq_api_key_here"
+        # GROQ_MODEL_NAME="mixtral-8x7b-32768" # Optional
+        ```
+    *   **Example for Google Gemini:**
+        ```env
+        LLM_PROVIDER="gemini"
+        GOOGLE_API_KEY="your_google_api_key_here"
+        # GOOGLE_GEMINI_MODEL_NAME="gemini-1.5-pro-latest" # Optional
+        ```
+    *   **Important:** The `.env` file contains sensitive keys and is ignored by Git. Do not commit it.
 
 **Running the Application:**
 
@@ -124,7 +142,7 @@ There are two main ways to run the application:
 
 2.  **Command-Line Interface (CLI - for backend logic testing/alternative interaction):**
     *   Ensure the database is initialized as above.
-    *   Ensure API keys are set in `.env`.
+    *   Ensure API keys and `LLM_PROVIDER` are set in `.env`.
     *   Run:
         ```bash
         python main_crew.py
@@ -135,7 +153,7 @@ There are two main ways to run the application:
 
 *   **Flask:** For the web framework.
 *   **CrewAI:** For orchestrating AI agents and tasks.
-*   **Langchain (Core, Community, OpenAI, Groq):** For LLM interactions, tools, and Pydantic model integration.
+*   **Langchain (Core, Community, OpenAI, Groq, Google GenAI):** For LLM interactions, tools, and Pydantic model integration. The specific provider package (e.g., `langchain-openai`, `langchain-groq`, `langchain-google-genai`) is needed based on the chosen LLM.
 *   **Pydantic (v2.x):** Explicitly used for data validation and settings management, ensuring compatibility with the latest Langchain and CrewAI versions. Included in `requirements.txt`.
 *   **Python-Dotenv:** For managing environment variables.
 *   **SQLite:** The `sqlite3` module is part of the Python standard library.

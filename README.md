@@ -151,11 +151,17 @@ There are two main ways to run the application:
 
 ## Key Dependencies
 
-*   **Flask:** For the web framework.
-*   **CrewAI:** For orchestrating AI agents and tasks.
-*   **Langchain (Core, Community, OpenAI, Groq, Google GenAI):** For LLM interactions, tools, and Pydantic model integration. The specific provider package (e.g., `langchain-openai`, `langchain-groq`, `langchain-google-genai`) is needed based on the chosen LLM.
-*   **Pydantic (v2.x):** Explicitly used for data validation and settings management, ensuring compatibility with the latest Langchain and CrewAI versions. Included in `requirements.txt`.
-*   **Python-Dotenv:** For managing environment variables.
+*   **Flask (`>=2.0.0,<4.0.0`):** For the web framework.
+*   **CrewAI (`>=0.28.8,<0.29.0`):** For orchestrating AI agents and tasks.
+*   **Langchain Packages:**
+    *   `langchain (>=0.2.0,<0.3.0)`: Core Langchain library.
+    *   `langchain-core (>=0.2.0,<0.3.0)`: Provides base abstractions and LangChain Expression Language.
+    *   `langchain-community (>=0.2.0,<0.3.0)`: Community-maintained third-party integrations.
+    *   `langchain-openai (>=0.2.0,<0.3.0)`: OpenAI integration.
+    *   `langchain-google-genai (>=0.1.5,<0.2.0)`: Google Gemini integration.
+    *   `langchain-groq (>=0.1.5,<0.2.0)`: Groq integration.
+*   **Pydantic (`>=2.7.0,<3.0.0`):** Explicitly used for data validation and settings management, ensuring compatibility with the latest Langchain and CrewAI versions.
+*   **Python-Dotenv (`>=1.0.0,<2.0.0`):** For managing environment variables.
 *   **SQLite:** The `sqlite3` module is part of the Python standard library.
 
 ## Testing
